@@ -1,7 +1,7 @@
 cloudy-tasks
 ============
 
-NodeJS To-do list which uses google tasks api
+NodeJS To-do list which uses google tasks api.. THIS STILL NOT USABLE!
 
 What is this?
 ============
