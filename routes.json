@@ -1,4 +1,24 @@
 [{
-    "settings": [ "master" ]
+    "settings": [ "master" ],
+    "get tasks: list": {
+    	"verbs": ["get"],
+    	"path": "/tasks/v1/users/@me/lists",
+    	"call": "api.getList"
+    },
+    "web access: Google oauth2 check login": {
+    	"verbs": ["get"],
+    	"path": "/",
+    	"call": "web.checkLogin"
+    },
+    "web access: Google oauth2 get cb": {
+    	"verbs": ["post","get"],
+    	"path": "/goatuh/cb",
+    	"call": "web.google_cb"
+    },
+    "web access: Google user logged in": {
+    	"verbs": ["get"],
+    	"path": "/goauth/done",
+    	"call": "web.google_done"
+    }
 
 }]

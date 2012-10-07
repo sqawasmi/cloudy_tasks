@@ -2,12 +2,12 @@
  * Copyright (c) 2012 Yahoo! Inc. All rights reserved.
  */
 /*jslint anon:true, sloppy:true, nomen:true*/
-YUI.add('api', function(Y, NAME) {
+YUI.add('web', function(Y, NAME) {
 
 /**
- * The api module.
+ * The web module.
  *
- * @module api
+ * @module web
  */
 
     /**
@@ -29,7 +29,7 @@ YUI.add('api', function(Y, NAME) {
          *        to the Mojito API.
          */
         index: function(ac) {
-            ac.models.apiModelFoo.getData(function(err, data) {
+            ac.models.webModelFoo.getData(function(err, data) {
                 if (err) {
                     ac.error(err);
                     return;
@@ -41,12 +41,21 @@ YUI.add('api', function(Y, NAME) {
                 });
             });
         },
-        getList: function(ac) {
-            ac.done({
-                "list": "123"
-            }, 'json');
+        checkLogin: function(ac) {
+            ac.done({'login': 'failed'}, 'json');
+        },
+        google_cb: function(ac) {
+            console.log(ac.params);
+            ac.goauth.callback({"x": 1}, function(result, err) {
+                ac.done(result, 'json');
+            });
+        },
+        google_done: function(ac) {
+            ac.goauth.test(function(err, result) {
+                ac.done(result, 'json');
+            });
         }
 
     };
 
-}, '0.0.1', {requires: ['mojito', 'apiModelFoo']});
+}, '0.0.1', {requires: ['mojito', 'webModelFoo', 'session-addon', 'goauth-addon']});
