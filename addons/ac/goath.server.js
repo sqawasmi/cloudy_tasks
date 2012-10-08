@@ -10,14 +10,15 @@ YUI.add('goauth-addon', function(Y, NAME) {
 	    this.cbUrl = "http://example.com:8666/goatuh/cb";
 		this.loginUrl = "http://example.com:8666/goauth/login";
 		this.siteUrl = "http://example.com:8666/goauth/done";
-		this.fbscope = "email,user_interests,user_about_me,user_hometown,user_location,user_status,user_birthday";
-		this.gUrl = "https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/tasks" + "&redirect_uri=" + encodeURIComponent(this.cbUrl)+"&response_type=code"+"&client_id="+this.appId;
+		this.gscope = "https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/tasks";
+		this.gUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + this.gscope + "&redirect_uri=" + encodeURIComponent(this.cbUrl)+"&response_type=code"+"&client_id="+this.appId;
 		this.access = 'https://accounts.google.com/o/oauth2/token';
+		this.gUserInfo = 'https://www.googleapis.com/oauth2/v1/userinfo';
 	};
 	Addon.prototype = {
 		namespace: 'goauth',
 		redirect: function(next) {
-		    this.ac.http.redirect(this.fbUrl,'302');
+		    this.ac.http.redirect(this.gUrl,'302');
 			next();
 		},
 		getToken: function(code, next) {
@@ -36,15 +37,14 @@ YUI.add('goauth-addon', function(Y, NAME) {
 			//?client_id=' + this.appId + "&redirect_uri=" + encodeURIComponent(this.cbUrl) + "&client_secret=" + this.appSecret + "&code=";
 			var _self = this;
 			Y.mojito.lib.REST.POST(_self.access, params, config, function (err, res) {
-				console.log('starting the error!');
 				console.log(res);
 				if (err) {
+					console.log('starting error!');
 					console.log(err.getAllResponseHeaders());
 					console.log(err);
 					throw err;
 				}
-				response = Y.QueryString.parse(res.getBody());
-				console.log(response);
+				response = JSON.parse(res.getBody());
 				_self.ac.session.set('access_token', response.access_token, function (err, result) {
 					next(null, {"done":"success"});
 				});
@@ -66,30 +66,35 @@ YUI.add('goauth-addon', function(Y, NAME) {
 		},
 		getContent: function(next) {
 			var token = this.ac.session.get('access_token');
+			console.log('hooo:');
+			console.log(token);
 			var user = this.ac.session.get('user');
 			var _self = this;
 			if (typeof(user) != 'undefined') {
 				next(null, user);
 			}
 			else if (typeof(token) != 'undefined') {
-				var url = 'https://graph.facebook.com/me?access_token=' + token;
-				Y.mojito.lib.REST.GET(url, {}, config, function (err, res) {
+				var url = this.gUserInfo + '?access_token=' + token;
+				Y.mojito.lib.REST.GET(url, {}, {}, function (err, res) {
 					if (err) 
 						throw err;
 					var data = JSON.parse(res.getBody());
 					var user = {
+						id: data.id,
 						email: data.email,
 						name: data.name,
-						first_name: data.first_name,
-						id: data.id,
-						username: data.username
+						gender: data.gender,
+						given_name: data.given_name,
+						timezone: data.timezone
 					}
 					_self.ac.session.set('user', user, function (err, result) {
 						next(null, user);
 					});
 				});
-			} else
+			} else {
+				console.log('safaaa');
 				this.ac.http.redirect(this.loginUrl,'302');
+			}
 		},
 		test: function(next) {
 			console.log(this.ac.session.get('access_token'));

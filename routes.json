@@ -7,8 +7,8 @@
     },
     "web access: Google oauth2 check login": {
     	"verbs": ["get"],
-    	"path": "/",
-    	"call": "web.checkLogin"
+    	"path": "/goauth/login",
+    	"call": "web.login"
     },
     "web access: Google oauth2 get cb": {
     	"verbs": ["post","get"],

@@ -41,8 +41,10 @@ YUI.add('web', function(Y, NAME) {
                 });
             });
         },
-        checkLogin: function(ac) {
-            ac.done({'login': 'failed'}, 'json');
+        login: function(ac) {
+            ac.goauth.redirect(function() {
+                return;
+            });
         },
         google_cb: function(ac) {
             console.log(ac.params);
