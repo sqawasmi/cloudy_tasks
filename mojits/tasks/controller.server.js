@@ -20,6 +20,7 @@ YUI.add('tasks', function(Y, NAME) {
 
         init: function(config) {
             this.config = config;
+            this.gList = '';
         },
 
         /**
@@ -40,8 +41,18 @@ YUI.add('tasks', function(Y, NAME) {
                     data: data
                 });
             });
+        },
+        getList: function(ac) {
+            url = 'https://www.googleapis.com/tasks/v1/users/@me/lists';
+            ac.goauth.getContent(url, function(err, result) {
+                console.log(result);
+                for (var item in result.items) {
+                    console.log(result.items[item].title);
+                }
+                ac.done({'done': 'success'}, 'json');
+            });
         }
 
     };
 
-}, '0.0.1', {requires: ['mojito', 'tasksModelFoo']});
+}, '0.0.1', {requires: ['mojito', 'tasksModelFoo', 'goauth-addon']});

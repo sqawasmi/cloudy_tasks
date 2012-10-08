@@ -10,6 +10,9 @@
             },
             "goauth": {
                 "type": "goauth"
+            },
+            "tasks": {
+                "type": "tasks"
             }
         }
     },
