@@ -2,18 +2,18 @@
  * Copyright (c) 2012 Yahoo! Inc. All rights reserved.
  */
 /*jslint anon:true, sloppy:true, nomen:true*/
-YUI.add('webModelFoo', function(Y, NAME) {
+YUI.add('goauthModelFoo', function(Y, NAME) {
 
 /**
- * The webModelFoo module.
+ * The goauthModelFoo module.
  *
- * @module web
+ * @module goauth
  */
 
     /**
-     * Constructor for the webModelFoo class.
+     * Constructor for the goauthModelFoo class.
      *
-     * @class webModelFoo
+     * @class goauthModelFoo
      * @constructor
      */
     Y.namespace('mojito.models')[NAME] = {

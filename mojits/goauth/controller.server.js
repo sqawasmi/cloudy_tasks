@@ -2,12 +2,12 @@
  * Copyright (c) 2012 Yahoo! Inc. All rights reserved.
  */
 /*jslint anon:true, sloppy:true, nomen:true*/
-YUI.add('web', function(Y, NAME) {
+YUI.add('goauth', function(Y, NAME) {
 
 /**
- * The web module.
+ * The goauth module.
  *
- * @module web
+ * @module goauth
  */
 
     /**
@@ -29,7 +29,7 @@ YUI.add('web', function(Y, NAME) {
          *        to the Mojito API.
          */
         index: function(ac) {
-            ac.models.webModelFoo.getData(function(err, data) {
+            ac.models.goauthModelFoo.getData(function(err, data) {
                 if (err) {
                     ac.error(err);
                     return;
@@ -60,4 +60,4 @@ YUI.add('web', function(Y, NAME) {
 
     };
 
-}, '0.0.1', {requires: ['mojito', 'webModelFoo', 'session-addon', 'goauth-addon']});
+}, '0.0.1', {requires: ['mojito', 'goauthModelFoo', 'session-addon', 'goauth-addon']});

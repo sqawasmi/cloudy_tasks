@@ -8,8 +8,8 @@
             "api": {
                 "type": "api"
             },
-            "web": {
-                "type": "web"
+            "goauth": {
+                "type": "goauth"
             }
         }
     },

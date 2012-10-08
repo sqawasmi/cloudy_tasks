@@ -2,7 +2,7 @@
  * Copyright (c) 2012 Yahoo! Inc. All rights reserved.
  */
 
-YUI.add('webModelFoo-tests', function(Y, NAME) {
+YUI.add('goauthModelFoo-tests', function(Y, NAME) {
     
     var suite = new YUITest.TestSuite(NAME),
         model = null,
@@ -10,10 +10,10 @@ YUI.add('webModelFoo-tests', function(Y, NAME) {
     
     suite.add(new YUITest.TestCase({
         
-        name: 'webModelFoo user tests',
+        name: 'goauthModelFoo user tests',
         
         setUp: function() {
-            model = Y.mojito.models.webModelFoo;
+            model = Y.mojito.models.goauthModelFoo;
         },
         tearDown: function() {
             model = null;
@@ -36,4 +36,4 @@ YUI.add('webModelFoo-tests', function(Y, NAME) {
     
     YUITest.TestRunner.add(suite);
     
-}, '0.0.1', {requires: ['mojito-test', 'webModelFoo']});
+}, '0.0.1', {requires: ['mojito-test', 'goauthModelFoo']});

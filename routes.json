@@ -5,20 +5,20 @@
     	"path": "/tasks/v1/users/@me/lists",
     	"call": "api.getList"
     },
-    "web access: Google oauth2 check login": {
+    "goauth access: Google oauth2 check login": {
     	"verbs": ["get"],
     	"path": "/goauth/login",
-    	"call": "web.login"
+    	"call": "goauth.login"
     },
-    "web access: Google oauth2 get cb": {
+    "goauth access: Google oauth2 get cb": {
     	"verbs": ["post","get"],
     	"path": "/goatuh/cb",
-    	"call": "web.google_cb"
+    	"call": "goauth.google_cb"
     },
-    "web access: Google user logged in": {
+    "goauth access: Google user logged in": {
     	"verbs": ["get"],
     	"path": "/goauth/done",
-    	"call": "web.google_done"
+    	"call": "goauth.google_done"
     }
 
 }]
